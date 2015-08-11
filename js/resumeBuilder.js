@@ -1,5 +1,5 @@
 var bio = {
-	"name" : "Daniel M. Melo",
+	"name" : "Daniel Melo",
 	"role" : "Front-End Developer",
 	"contact" : {
 	"mobile" : "+553191889159",
@@ -77,6 +77,11 @@ var projects = {
 		}
 	]
 }
+var formattedName = HTMLheaderName.replace("%data%", bio.name);
+var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+
+$("#header").prepend(formattedName);
+$("#header").append(formattedRole);
 if(bio.skills.length > 0) {
 
 	$("#header").append(HTMLskillsStart);
@@ -90,3 +95,35 @@ if(bio.skills.length > 0) {
 	var formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
 	$("#skills").append(formattedSkill);
 }
+var i = 0;
+var displayWork = function displayWork() {
+for (job in work.jobs) {
+	$("#workExperience").append(HTMLworkStart);
+	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+	var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+	var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+	var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+	var formattedEmployerTitle = formattedEmployer + formattedTitle;
+	$(".work-entry:last").append(formattedEmployerTitle);
+	$(".work-entry:last").append(formattedDates);
+	$(".work-entry:last").append(formattedLocation);
+	$(".work-entry:last").append(formattedDescription);
+}
+}
+$(document).click(function(loc) {
+	var x = loc.pageX;
+	var y = loc.pageY;
+
+	logClicks(x,y);
+});
+
+function inName(name) {
+	name = name.trim().split(" ");
+	console.log(name);
+	name[1] = name[1].toUppercase;
+	name[0] = name[0].slice(0,1).toUpperCase() + internationName[0].slice(1).toLowerCase();
+
+	return name[0] +" "+name[1];
+}
+$("#main").append(internationalizeButton);
