@@ -71,7 +71,7 @@ education.display = function() {
 			for (school in education.schools) {
 		$("#education").append(HTMLschoolStart);
 		var formattedSchool = HTMLschoolName.replace("%data%", education.schools[school].name);
-		var formattedSchoolwithURL = formattedSchool.replace("%url%", education.schools[school].url);
+		var formattedSchoolwithURL = formattedSchool.replace("#", education.schools[school].url);
 		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
 		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
 		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
