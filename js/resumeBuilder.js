@@ -4,39 +4,48 @@ var bio = {
 	"contacts" : {
 		"mobile" : "+553191889159",
 		"email" : "danielmelo777@gmail.com",
-		"twitter" : "dmelo89",
 		"github" : "danielmelo89",
-		"blog" : "http://danielslab.com/",
-		"location" : "Belo Horizonte",
+		"twitter" : "dmelo89",
+		"blog" : "http://danielmmelo.com/",
+		"location" : "Belo Horizonte, Brazil",
 	},
 	"bioPic" : "https://scontent-gru1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/10896951_873016152719067_1387598860170594653_n.jpg?oh=23b9c08880dc666ca8e529b340bd9b78&oe=56389EA7",
-	"skills" : ["Entrepreneurship", "Programing", "Marketing", "Advertising", "Management"],
-	"welcomeMessage" : "Hello Mr Kitty."
+	"skills" : ["Entrepreneurship", "Programing", "Marketing", "Advertising"],
+	"welcomeMessage" : "Hi! I am glad you came! Take your time checking it out, I hope you'll like what you see!"
 }
 bio.display = function() {
 
-		var formattedPicture = HTMLbioPic.replace("%data%", bio.bioPic);
-		$("#header").prepend(formattedPicture);
-		var formattedName = HTMLheaderName.replace("%data%", bio.name);
-		$("#header").prepend(formattedName);
-		var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-		$("#header").append(formattedRole);
-		var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-		$("#header").append(formattedWelcomeMsg);
-
-		if(bio.skills.length > 0) {
-			$("#header").append(HTMLskillsStart);
-			var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-			$("#skills").append(formattedSkill);
-			var formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-			$("#skills").append(formattedSkill);
-			var formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-			$("#skills").append(formattedSkill);
-			var formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
-			$("#skills").append(formattedSkill);
+	var formattedPicture = HTMLbioPic.replace("%data%", bio.bioPic);
+	$("#header").append(formattedPicture);
+	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+	$("#header").prepend(formattedRole);
+	var formattedName = HTMLheaderName.replace("%data%", bio.name);
+	$("#header").prepend(formattedName);
+	var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+	$("#header").append(formattedWelcomeMsg);
+	if(bio.skills.length > 0) {
+		$("#header").append(HTMLskillsStart);
+		for (skill in bio.skills) {
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
+		$("#skills").append(formattedSkill);
+		}
 	}
-    // TODO: Display Contacts!!
+	formattedMobile =  HTMLmobile.replace("%data%", bio.contacts.mobile);
+	$("#topContacts, #footerContacts").append(formattedMobile);
+	formattedEmail =  HTMLemail.replace("%data%", bio.contacts.email);
+	$("#topContacts, #footerContacts").append(formattedEmail);
+	formattedTwitter =  HTMLtwitter.replace("%data%", bio.contacts.twitter);
+	$("#topContacts, #footerContacts").append(formattedTwitter);
+	formattedGithub =  HTMLgithub.replace("%data%", bio.contacts.github);
+	$("#topContacts, #footerContacts").append(formattedGithub);
+	/* TODO: Create a blog, then comeback and uncomment the code bellow. ;)
 
+	formattedBlog =  HTMLblog.replace("%data%", bio.contacts.blog);
+	$("#topContacts, #footerContacts").append(formattedBlog);
+
+	*/
+	formattedLocation =  HTMLlocation.replace("%data%", bio.contacts.location);
+	$("#topContacts, #footerContacts").append(formattedLocation);
 }
 
 var education = {
@@ -48,14 +57,6 @@ var education = {
 		"major" : ["Advertising", "Publicity"],
 		"dates" : 2010,
 		"url" : "http://www.newtonpaiva.br/"
-	},
-	{
-		"name" : "The Wharton School",
-		"location" : "Philadelphia, PA",
-		"degree" : "Certificate",
-		"major" : ["Marketing"],
-		"dates" : 2010,
-		"url" : "http://www.newtonpaiva.br/"
 	}
 	],
 	"onlineCourses" : [
@@ -63,12 +64,18 @@ var education = {
 		"title" : "Body Language for Entrepreneurs",
 		"school" : "Udemy",
 		"date": 2014,
-		"url" : "www.udemy.com"
+		"url" : "http://www.udemy.com/"
+	},
+	{
+		"title" : "Introduction to Marketing",
+		"school" : "The Wharton School",
+		"date": 2015,
+		"url" : "http://coursera.com/"
 	}
 	]
 }
 education.display = function() {
-			for (school in education.schools) {
+	for (school in education.schools) {
 		$("#education").append(HTMLschoolStart);
 		var formattedSchool = HTMLschoolName.replace("%data%", education.schools[school].name);
 		var formattedSchoolwithURL = formattedSchool.replace("#", education.schools[school].url);
@@ -81,9 +88,32 @@ education.display = function() {
 		$(".education-entry:last").append(formattedDates);
 		$(".education-entry:last").append(formattedMajor);
 	}
+	if (education.onlineCourses.length > 0) {
+		$("#education").append(HTMLonlineClasses);
+	for (course in education.onlineCourses) {
+		$("#education").append(HTMLschoolStart);
+		var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
+		var formattedTitle = formattedTitle.replace("#", education.onlineCourses[course].url);
+		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
+		var formattedURL = HTMLonlineURL.replace("#", education.onlineCourses[course].url);
+		var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
+		var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
+		$(".education-entry:last").append(formattedTitle + formattedSchool);
+		$(".education-entry:last").append(formattedLocation);
+		$(".education-entry:last").append(formattedDates);
+		$(".education-entry:last").append(formattedURL);
+	}
+	}
 }
 var work = {
 	"jobs" : [
+	{
+		"employer" : "Google",
+		"title" : "Front-End Ninja",
+		"location" : "San Francisco, CA",
+		"dates" : "January 2016",
+		"description" : "I'll give my best and find a way so in the future I can be in a company like Google!"
+	},
 	{
 		"employer" : "Tag House",
 		"title" : "Founder & CEO",
@@ -116,7 +146,7 @@ var work = {
 	]
 }
 work.display = function() {
-		for (job in work.jobs) {
+	for (job in work.jobs) {
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
 		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
@@ -136,8 +166,14 @@ var projects = {
 		"title" : "Portal Programas Ambev",
 		"dates" : "September 2012 - Current",
 		"description" : "My responsabilities include client relationship, project and interface planning and management. This project is a web based cloud software for Trade Marketing actions management, reporting and tracking. With more than 5000+ users in the entire Brazil area.",
-		"images" : ["http://www.portalprogramas.com.br/assets/img/logo.png"]
-	}
+		"images" : ["http://s10.postimg.org/6o3eer755/Ambev_Programas_Login.png"]
+	},
+	{
+		"title" : "Tag House Website",
+		"dates" : "2013",
+		"description" : "Designed the website and created content.",
+		"images" : ["http://s10.postimg.org/hoyjjrze1/In_cio_Tag_House.png", "http://s23.postimg.org/3mgykmgp7/5_jpg_1240_886.png"]
+	},
 	]
 }
 projects.display = function() {
@@ -150,8 +186,10 @@ projects.display = function() {
 		var formattedPDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
 		$(".project-entry:last").append(formattedPDescription);
 		if (projects.projects[project].images.length > 0) {
-		var formattedPImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
-		$(".project-entry:last").append(formattedPImage);
+			for (image in projects.projects[project].images) {
+			var formattedPImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+			$(".project-entry:last").append(formattedPImage);
+		}
 		}
 	}
 }
@@ -164,14 +202,11 @@ $(document).click(function(loc) {
 
 function inName(name) {
 	name = bio.name;
- 	name = name.trim().split(" ");
+	name = name.trim().split(" ");
 	name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
 	name[1] = name[1].toUpperCase();
 	return name[0] +" "+ name[1];
 }
-
-$("#main").prepend(internationalizeButton);
-
 bio.display();
 work.display();
 projects.display();
